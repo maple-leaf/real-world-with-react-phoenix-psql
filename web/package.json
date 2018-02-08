@@ -19,11 +19,18 @@
     "ts-jest": "^22.0.0",
     "typescript": "^2.6.2",
     "webpack": "^3.10.0",
-    "webpack-dev-server": "^2.9.7"
+    "webpack-dev-server": "^2.9.7",
+    "@storybook/react": "^3.3.12",
+    "@storybook/addon-actions": "^3.3.12",
+    "@storybook/addon-links": "^3.3.12",
+    "@storybook/addons": "^3.3.12",
+    "babel-core": "^6.26.0"
   },
   "scripts": {
     "test": "jest",
-    "dev": "webpack-dev-server --open --config=./builds/webpack.dev.js"
+    "dev": "webpack-dev-server --open --config=./builds/webpack.dev.js",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "jest": {
     "moduleFileExtensions": [
