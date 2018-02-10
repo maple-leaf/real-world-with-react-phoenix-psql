@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Logo } from './logo/index';
+import Logo from './logo/index';
 
 export function RwHeader(): JSX.Element {
   return (

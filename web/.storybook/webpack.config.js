@@ -5,17 +5,22 @@
 // IMPORTANT
 // When you add this file, we won't add the default configurations which is similar
 // to "React Create App". This only has babel loader to load JavaScript.
+const path = require('path');
 
 module.exports = {
-  plugins: [
-    // your custom plugins
-  ],
-  module: {
-      rules: [
-          { test: /\.(ts|tsx|js)?$/, loader: "awesome-typescript-loader" },
+    resolve: {
+        extensions: [".ts", ".tsx", ".js", ".json"],
+        alias: {
+            components: path.resolve(__dirname, '../src/components')
+        },
+    },
 
-          // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
-          { enforce: "pre", test: /\.js$/, loader: "source-map-loader" }
-      ]
-  },
+    plugins: [
+      // your custom plugins
+    ],
+    module: {
+        rules: [
+            { test: /\.(ts|tsx)?$/, loader: "awesome-typescript-loader" },
+        ]
+    },
 };

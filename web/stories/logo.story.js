@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { Logo } from './index.tsx';
+import Logo from '../src/components/logo/index';
 
 storiesOf('Logo', module)
-.add('plain text', () => (
-    <Logo />
-));
+    .add('plain text', () => (
+        <Logo />
+    ));
