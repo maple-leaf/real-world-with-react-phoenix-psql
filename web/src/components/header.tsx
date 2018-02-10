@@ -1,12 +1,11 @@
 import * as React from "react";
+import { Logo } from './logo/index';
 
 export function RwHeader(): JSX.Element {
   return (
     <nav className="navbar navbar-light">
       <div className="container">
-        <a className="navbar-brand" href="index.html">
-          Real World
-        </a>
+        <Logo />
         <ul className="nav navbar-nav pull-xs-right">
           <li className="nav-item">
             <a className="nav-link active" href="">
