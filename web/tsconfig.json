@@ -8,16 +8,17 @@
     "strictFunctionTypes": true,
     "noImplicitThis": true,
     "alwaysStrict": true,
-    "noUnusedLocals": true,
+    "noUnusedLocals": false,
     "noUnusedParameters": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "jsx": "react",
     "moduleResolution": "node",
-    "noImplicitAny": false
+    "noImplicitAny": true
   },
   "include": [
-      "./src/**/*.ts",
-      "./tests/**/*.ts"
+      "./src/**/*.(ts|tsx)",
+      "./tests/**/*.ts",
+      "./stories/**/*.(ts|tsx)"
   ]
 }

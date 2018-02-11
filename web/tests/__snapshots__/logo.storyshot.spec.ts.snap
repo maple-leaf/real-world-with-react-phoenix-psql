@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Logo plain text 1`] = `
+<a
+  className="navbar-brand"
+  href="index.html"
+>
+  Real World
+</a>
+`;

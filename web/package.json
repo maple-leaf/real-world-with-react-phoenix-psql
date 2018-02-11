@@ -13,6 +13,8 @@
     "@storybook/addons": "^3.3.12",
     "@storybook/react": "^3.3.12",
     "@types/jest": "^21.1.9",
+    "@types/storybook__addon-actions": "^3.0.1",
+    "@types/storybook__react": "^3.0.6",
     "awesome-typescript-loader": "^3.4.1",
     "babel-jest": "^22.0.4",
     "clean-webpack-plugin": "^0.1.17",
