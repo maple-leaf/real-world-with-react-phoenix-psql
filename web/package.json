@@ -19,11 +19,14 @@
     "ts-jest": "^22.0.0",
     "typescript": "^2.6.2",
     "webpack": "^3.10.0",
-    "webpack-dev-server": "^2.9.7"
+    "webpack-dev-server": "^2.9.7",
+    "react-docgen-typescript": "^1.2.4",
+    "react-styleguidist": "^6.2.5"
   },
   "scripts": {
     "test": "jest",
-    "dev": "webpack-dev-server --open --config=./builds/webpack.dev.js"
+    "dev": "webpack-dev-server --open --config=./builds/webpack.dev.js",
+    "styleguidist": "styleguidist server --config styleguide.config.js"
   },
   "jest": {
     "moduleFileExtensions": [

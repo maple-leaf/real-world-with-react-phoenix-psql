@@ -1,6 +1,6 @@
 import * as React from "react";
 
-export function RwFooter(): JSX.Element {
+export const RwFooter: React.SFC = () => {
   return (
     <footer>
       <div className="container">

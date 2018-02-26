@@ -1,11 +1,33 @@
 import * as React from "react";
 
-export function RwHeader(): JSX.Element {
+/**
+ * Column properties.
+ */
+export interface IColumnProps {
+    /** prop1 description */
+    prop1?: string;
+    /** prop2 description */
+    prop2: number;
+    /**
+     * prop3 description
+     */
+    prop3: () => void;
+    /** prop4 description */
+    prop4: 'option1' | 'option2' | 'option3';
+}
+
+/*
+ * Header Component
+ */
+const RwHeader: React.SFC<IColumnProps> = (props) => {
+/*
+ * @desc Header Component
+ */
   return (
     <nav className="navbar navbar-light">
       <div className="container">
         <a className="navbar-brand" href="index.html">
-          Real World
+        {props.prop1 || 'Real World'}
         </a>
         <ul className="nav navbar-nav pull-xs-right">
           <li className="nav-item">
@@ -32,4 +54,6 @@ export function RwHeader(): JSX.Element {
       </div>
     </nav>
   );
-}
+};
+
+export default RwHeader;
