@@ -1,59 +1,60 @@
+// @format
 import * as React from "react";
+import { Link } from "react-router-dom";
 
-/**
- * Column properties.
- */
-export interface IColumnProps {
+/** Column properties.  */
+export interface HeaderProps {
     /** prop1 description */
-    prop1?: string;
-    /** prop2 description */
-    prop2: number;
-    /**
-     * prop3 description
-     */
-    prop3: () => void;
-    /** prop4 description */
-    prop4: 'option1' | 'option2' | 'option3';
+    brandText?: string;
 }
 
 /*
  * Header Component
  */
-const RwHeader: React.SFC<IColumnProps> = (props) => {
-/*
- * @desc Header Component
- */
-  return (
-    <nav className="navbar navbar-light">
-      <div className="container">
-        <a className="navbar-brand" href="index.html">
-        {props.prop1 || 'Real World'}
-        </a>
-        <ul className="nav navbar-nav pull-xs-right">
-          <li className="nav-item">
-            <a className="nav-link active" href="">
-              Home
-            </a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="">
-              <i className="ion-compose" />&nbsp;New Post
-            </a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="">
-              <i className="ion-gear-a" />&nbsp;Settings
-            </a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="">
-              Sign up
-            </a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-  );
-};
-
-export default RwHeader;
+export class RwHeader extends React.PureComponent<HeaderProps> {
+    /*
+     * @desc Header Component
+     */
+    render() {
+        return (
+            <nav className="navbar navbar-light">
+                <div className="container">
+                    <Link className="navbar-brand" to="/">
+                        {this.props.brandText || "Real World"}
+                    </Link>
+                    <a
+                        className="navbar-slogan"
+                        href="https://github.com/gothinkster/realworld"
+                    >
+                        realworld github project
+                    </a>
+                    <ul className="nav navbar-nav pull-xs-right">
+                        <li className="nav-item">
+                            <Link className="nav-link active" to="/">
+                                Home
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/article/new">
+                                <i className="ion-compose" />&nbsp;New Post
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/settings">
+                                <i className="ion-gear-a" />&nbsp;Settings
+                            </Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/signin">
+                                Sign up
+                            </Link>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        );
+    }
+    x() {
+        return "y";
+    }
+}
