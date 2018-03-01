@@ -23,4 +23,9 @@ defmodule AppWeb.AuthController do
     |> configure_session(drop: true)
     |> json(%{"success" => true})
   end
+
+  def test(conn, _) do
+    conn
+    |> text("test")
+  end
 end

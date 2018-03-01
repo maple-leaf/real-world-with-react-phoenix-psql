@@ -13,17 +13,39 @@ defmodule AppWeb.Router do
     plug :accepts, ["json"]
   end
 
+  defp verify_auth(conn, _) do
+    userId = conn
+             |> fetch_session
+             |> get_session(:user_id)
+    if userId do
+      conn
+    else
+      conn
+      |> put_status(:unauthorized)
+      |> text(:unauthorized)
+      |> halt()
+    end
+  end
+  pipeline :auth_verify do
+    plug :verify_auth
+  end
+
   scope "/", AppWeb do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
   end
 
+  scope "/", AppWeb do
+    post "/login", AuthController, :login
+    post "/logout", AuthController, :logout
+  end
+
   # Other scopes may use custom stacks.
   scope "/api", AppWeb do
     pipe_through :api
+    pipe_through :auth_verify
 
-    post "/login", AuthController, :login
-    post "/logout", AuthController, :logout
+    get "/test", AuthController, :test
   end
 end
