@@ -24,5 +24,6 @@ defmodule AppWeb.Router do
     pipe_through :api
 
     post "/login", AuthController, :login
+    post "/logout", AuthController, :logout
   end
 end

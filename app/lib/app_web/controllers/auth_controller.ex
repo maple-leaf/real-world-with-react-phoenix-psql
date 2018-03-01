@@ -3,11 +3,24 @@ defmodule AppWeb.AuthController do
   alias App.User
 
   def login(conn, %{"username" => username, "passwd" => passwd}) do
-    if User.validate(User.getUserByName(username), passwd) do
-      json conn, %{"success" => true, "username" => username}
-    else
-      json conn, %{"success" => false, "username" => username}
-    end
+    user = User.getUserByName(username)
 
+    if User.validate(user, passwd) do
+      conn
+      |> fetch_session
+      |> put_session(:user_id, user.id)
+      |> json(%{"success" => true})
+    else
+      conn
+      |> put_status(:unauthorized)
+      |> json(%{"success" => false})
+    end
+  end
+
+  def logout(conn, _) do
+    conn
+    |> fetch_session
+    |> configure_session(drop: true)
+    |> json(%{"success" => true})
   end
 end
