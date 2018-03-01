@@ -26,7 +26,9 @@ defmodule App.User do
   end
 
   def getUserByName(username) when is_bitstring(username) do
-    Repo.get_by User, %{"name": username}
+    User
+    |> Repo.get_by(%{"name": username})
+    |> Repo.preload(:credential)
   end
 
   def create(attrs \\ %{}) do
@@ -36,6 +38,13 @@ defmodule App.User do
     |> changeset(userWithCredential)
     |> Ecto.Changeset.cast_assoc(:credential, with: &Credential.changeset/2)
     |> Repo.insert
+  end
+
+  def validate(user, passwd) when is_map(user) do
+      Bcrypt.verify_pass(passwd, user.credential.passwd_hash)
+  end
+  def validate(user, passwd) when is_nil(user) do
+      false
   end
 
   defp transformToUser(attrs \\ %{}) do
