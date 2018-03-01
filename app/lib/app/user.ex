@@ -1,4 +1,7 @@
 defmodule App.User do
+  @moduledoc """
+    User Model
+  """
   use Ecto.Schema
   import Ecto.Changeset
   alias App.User
@@ -25,12 +28,45 @@ defmodule App.User do
     |> validate_required([:name, :email])
   end
 
+  @doc """
+  get user by given user name
+
+  ## Parameters
+    - username: String
+
+  ## Examples
+  ```
+  iex> User.getUserByName("Ben")
+  %{name: "Ben", ...}
+
+  iex> User.getUserByName("not_exist")
+  nil
+  ```
+  """
   def getUserByName(username) when is_bitstring(username) do
     User
     |> Repo.get_by(%{"name": username})
     |> Repo.preload(:credential)
   end
 
+  @doc"""
+  create user with given attributes and insert into db
+
+  ## Parameters
+    - attrs: Map - contains user info
+    - attrs.name* String - user name
+    - attrs.email* String - user email
+    - attrs.passwd* String - password of user
+    - attrs.bio? String - bio of user
+    - attrs.avatar? String - avatar address of user
+
+  ## Examples
+  ```
+  iex> User.create(%{name: "Ben", email: "ben@example.com", passwd: "random123"})
+
+  iex> User.create(%{name: "Ben", email: "ben@example.com", passwd: "random123", bio: "a simple bio"})
+  ```
+  """
   def create(attrs \\ %{}) do
     userWithCredential = transformToUser(attrs)
 
@@ -40,6 +76,25 @@ defmodule App.User do
     |> Repo.insert
   end
 
+  @doc """
+  validate user with password
+
+  ## Parameters
+    - user* %User{} - user changeset
+    - passwd* String - password to verify
+
+  ## Examples
+  ```
+  iex> User.validate(User.getUserByName("ben"), "passwordOfBen")
+  true
+
+  iex> User.validate(User.getUserByName("ben"), "passwordOfOther")
+  false
+
+  iex> User.validate(User.getUserByName("not_exist"), "password")
+  false
+  ```
+  """
   def validate(%User{} = user, passwd) do
       Bcrypt.verify_pass(passwd, user.credential.passwd_hash)
   end
