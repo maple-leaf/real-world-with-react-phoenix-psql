@@ -40,7 +40,7 @@ defmodule App.User do
     |> Repo.insert
   end
 
-  def validate(user, passwd) when is_map(user) do
+  def validate(%User{} = user, passwd) do
       Bcrypt.verify_pass(passwd, user.credential.passwd_hash)
   end
   def validate(user, passwd) when is_nil(user) do
