@@ -2,7 +2,8 @@ defmodule AppWeb.UserTest do
   use AppWeb.ConnCase
   alias App.User
 
-  @valid_attrs %{bio: "my life", email: "pat@example.com", name: "Pat Example"}
+  @not_transformed_attrs %{bio: "my life", email: "pat@example.com", name: "Pat Example", passwd: "random"}
+  @valid_attrs %{bio: "my life", email: "pat@example.com", name: "Pat Example", credential: %{passwd_hash: "randomhash", email: "pat@example.com"}}
   @invalid_attrs %{}
 
   describe "user schema" do
@@ -19,18 +20,21 @@ defmodule AppWeb.UserTest do
 
   describe "model operation" do
     test "User.create" do
-      {:ok, user} = User.create(@valid_attrs)
-      assert user.name === Map.get(@valid_attrs, :name)
-      assert user.email === Map.get(@valid_attrs, :email)
-      assert user.bio === Map.get(@valid_attrs, :bio)
+      {:ok, user} = User.create(@not_transformed_attrs)
+      assert user.name === Map.get(@not_transformed_attrs, :name)
+      assert user.email === Map.get(@not_transformed_attrs, :email)
+      assert user.bio === Map.get(@not_transformed_attrs, :bio)
+      assert user.credential.email === user.email
+      assert user.credential.user_id === user.id
+      assert user.credential.passwd_hash !== nil
     end
 
     test "User.getUserByName" do
-      userNonExist = User.getUserByName "abc"
+      userNonExist = User.getUserByName "no_exist"
       assert userNonExist === nil
 
-      {:ok, user} = User.create(@valid_attrs)
-      name = Map.get(@valid_attrs, :name)
+      {:ok, user} = User.create(@not_transformed_attrs)
+      name = Map.get(@not_transformed_attrs, :name)
       userExist = User.getUserByName name
       assert userExist !== nil
       assert userExist.name === name

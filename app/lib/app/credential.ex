@@ -7,6 +7,7 @@ defmodule App.Credential do
   schema "credentials" do
     field :email, :string
     field :user_id, :id
+    field :passwd_hash, :string
 
     timestamps()
   end
@@ -14,7 +15,7 @@ defmodule App.Credential do
   @doc false
   def changeset(%Credential{} = credential, attrs) do
     credential
-    |> cast(attrs, [:email])
-    |> validate_required([:email])
+    |> cast(attrs, [:email, :user_id, :passwd_hash])
+    |> validate_required([:email, :passwd_hash])
   end
 end
