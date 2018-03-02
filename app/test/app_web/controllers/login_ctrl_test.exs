@@ -1,11 +1,11 @@
 defmodule AppWeb.LoginControllerTest do
   use AppWeb.ConnCase
 
-  test "POST /api/login", %{conn: conn } do
-    username = "test"
-    passwd = "123"
+  test "POST /login", %{conn: conn } do
+    username = "xx123"
+    passwd = "xx123"
     postBody = ["username": username, "passwd": passwd]
-    res = post conn, "/api/login", postBody
-    assert json_response(res, 200) == %{"success" => false, "username" => username}
+    res = post conn, "/login", postBody
+    assert json_response(res, 401) == %{"success" => false}
   end
 end
