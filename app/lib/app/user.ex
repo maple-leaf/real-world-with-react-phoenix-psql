@@ -15,6 +15,8 @@ defmodule App.User do
     field :email, :string
     field :bio, :string
     field :avatar, :string
+    field :passwd, :string, virtual: true
+    field :passwd_confirmation, :string, virtual: true
     has_one :credential, Credential
 
     timestamps()
@@ -23,7 +25,8 @@ defmodule App.User do
   @doc false
   def changeset(%User{} = user, attrs) do
     user
-    |> cast(attrs, [:name, :email, :bio, :avatar])
+    |> cast(attrs, ~w(name email passwd passwd_confirmation bio avatar))
+    |> transformToUser()
     |> cast_assoc(:credential, required: true)
     |> validate_required([:name, :email])
   end
@@ -67,13 +70,18 @@ defmodule App.User do
   iex> User.create(%{name: "Ben", email: "ben@example.com", passwd: "random123", bio: "a simple bio"})
   ```
   """
-  def create(attrs \\ %{}) do
-    userWithCredential = transformToUser(attrs)
-
-    %User{}
-    |> changeset(userWithCredential)
-    |> Ecto.Changeset.cast_assoc(:credential, with: &Credential.changeset/2)
-    |> Repo.insert
+  def create(%{"passwd": passwd, "passwd_confirmation": passwd_confirmation} = attrs) do
+    if attrs.passwd === attrs.passwd_confirmation do
+      %User{}
+      |> changeset(attrs)
+      |> Ecto.Changeset.cast_assoc(:credential, with: &Credential.changeset/2)
+      |> Repo.insert
+    else
+      {:error, "password not euqal to confirmation"}
+    end
+  end
+  def create(_) do
+    {:error, "password or psaswd_confirmation incorrect"}
   end
 
   @doc """
@@ -103,14 +111,17 @@ defmodule App.User do
   end
 
   defp transformToUser(attrs \\ %{}) do
-    passwdHash = encryptPasswd(Map.get(attrs, :passwd))
+    passwd = get_change(attrs, :passwd)
+    email = get_change(attrs, :email)
+    passwdHash = encryptPasswd(passwd)
 
-    attrs
-    |> Map.delete(:passwd)
-    |> Map.put(:credential, %{ passwd_hash: passwdHash, email: Map.get(attrs, :email) })
+    put_change(attrs, :credential, %{ passwd_hash: passwdHash, email: email })
   end
 
   defp encryptPasswd(passwd) when is_bitstring(passwd) do
     Bcrypt.hash_pwd_salt(passwd)
+  end
+  defp encryptPasswd(passwd) when is_nil(passwd) do
+    nil
   end
 end
