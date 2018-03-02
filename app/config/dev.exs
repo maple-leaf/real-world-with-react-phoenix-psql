@@ -11,6 +11,7 @@ config :app, AppWeb.Endpoint,
   debug_errors: true,
   code_reloader: true,
   check_origin: false,
+  static_url: [scheme: "http", host: "localhost", port: 9000],
   watchers: []
 
 # ## SSL Support
