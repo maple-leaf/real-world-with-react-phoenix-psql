@@ -29,6 +29,7 @@ defmodule App.User do
     |> transformToUser()
     |> cast_assoc(:credential, required: true)
     |> validate_required([:name, :email])
+    |> unique_constraint(:email, name: :users_email_name_index)
   end
 
   @doc """
@@ -70,8 +71,8 @@ defmodule App.User do
   iex> User.create(%{name: "Ben", email: "ben@example.com", passwd: "random123", bio: "a simple bio"})
   ```
   """
-  def create(%{"passwd": passwd, "passwd_confirmation": passwd_confirmation} = attrs) do
-    if attrs.passwd === attrs.passwd_confirmation do
+  def create(%{"passwd" => passwd, "passwd_confirmation" => passwd_confirmation} = attrs) do
+    if attrs["passwd"] === attrs["passwd_confirmation"] do
       %User{}
       |> changeset(attrs)
       |> Ecto.Changeset.cast_assoc(:credential, with: &Credential.changeset/2)

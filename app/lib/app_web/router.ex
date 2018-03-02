@@ -39,6 +39,7 @@ defmodule AppWeb.Router do
   scope "/", AppWeb do
     post "/login", AuthController, :login
     post "/logout", AuthController, :logout
+    post "/register", AuthController, :register
   end
 
   # Other scopes may use custom stacks.
