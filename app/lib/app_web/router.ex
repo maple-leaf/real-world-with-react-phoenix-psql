@@ -38,8 +38,8 @@ defmodule AppWeb.Router do
   end
 
   scope "/", AppWeb do
-    post "/login", AuthController, :login
-    post "/logout", AuthController, :logout
+    post "/signin", AuthController, :signin
+    post "/signout", AuthController, :signout
     post "/register", AuthController, :register
   end
 

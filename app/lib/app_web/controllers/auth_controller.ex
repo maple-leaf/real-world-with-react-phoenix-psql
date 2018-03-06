@@ -2,7 +2,7 @@ defmodule AppWeb.AuthController do
   use AppWeb, :controller
   alias App.User
 
-  def login(conn, %{"username" => username, "passwd" => passwd}) do
+  def signin(conn, %{"username" => username, "passwd" => passwd}) do
     user = User.getUserByName(username)
 
     if User.validate(user, passwd) do
@@ -17,7 +17,7 @@ defmodule AppWeb.AuthController do
     end
   end
 
-  def logout(conn, _) do
+  def signout(conn, _) do
     conn
     |> fetch_session
     |> configure_session(drop: true)

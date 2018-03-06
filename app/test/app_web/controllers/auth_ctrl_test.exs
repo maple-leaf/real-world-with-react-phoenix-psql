@@ -1,4 +1,4 @@
-defmodule AppWeb.LoginControllerTest do
+defmodule AppWeb.AuthControllerTest do
   use AppWeb.ConnCase
 
   @username "xx123"
@@ -17,18 +17,18 @@ defmodule AppWeb.LoginControllerTest do
     assert json_response(res, 400) == %{"success" => false, "message" => "bad request"}
   end
 
-  test "POST /login with non-exist user", %{conn: conn } do
+  test "POST /signin with non-exist user", %{conn: conn } do
     postBody = ["username": @username, "passwd": @passwd]
-    res = post conn, "/login", postBody
+    res = post conn, "/signin", postBody
     assert json_response(res, 401) == %{"success" => false}
   end
 
-  test "POST /login with exist user", %{conn: conn } do
+  test "POST /signin with exist user", %{conn: conn } do
     postBody = ["name": @username, "email": @email, "passwd": @passwd, "passwd_confirmation": @passwd]
     post conn, "/register", postBody
 
     postBody = ["username": @username, "passwd": @passwd]
-    res = post conn, "/login", postBody
+    res = post conn, "/signin", postBody
     assert json_response(res, 200) == %{"success" => true}
   end
 end
