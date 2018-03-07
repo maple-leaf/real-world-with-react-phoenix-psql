@@ -19,6 +19,6 @@
 
   <body>
     <%= render @view_module, @view_template, assigns %>
-    <script src="<%= static_url(@conn, "/index.js") %>"></script>
+    <script crossorigin src="<%= static_url(@conn, "/index.js") %>"></script>
   </body>
 </html>

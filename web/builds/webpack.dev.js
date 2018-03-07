@@ -11,7 +11,8 @@ module.exports = {
     entry: "./src/index.tsx",
     output: {
         filename: "index.js",
-        path: __dirname + "/dist"
+        path: __dirname + "/dist",
+        crossOriginLoading: "anonymous"
     },
 
     // Enable sourcemaps for debugging webpack's output.
@@ -20,7 +21,11 @@ module.exports = {
     devServer: {
         contentBase: './dist',
         hot: true,
-        port: 9000
+        port: 9000,
+        headers: {
+            "Access-Control-Allow-Origin": "http://localhost:4000",
+            "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS"
+        }
     },
 
     resolve: {
