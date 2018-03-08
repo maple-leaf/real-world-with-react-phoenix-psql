@@ -5,7 +5,7 @@ import { RwHeader } from "../components/header";
 import { RwFooter } from "../components/footer";
 
 import { Settings } from "./settings";
-import { Login } from "./login";
+import { SignIn } from "./signin";
 import { Home } from "./home";
 import { Article } from "./article/index";
 import { ArticleEdit } from "./article/edit";
@@ -18,7 +18,7 @@ export function Index(): JSX.Element {
                 <RwHeader />
                 <Route path="/" exact component={Home} />
                 <Route path="/settings" component={Settings} />
-                <Route path="/login" component={Login} />
+                <Route path="/signin" component={SignIn} />
                 <Route path="/article/:articleId" component={Article} />
                 <Route path="/article/new" component={ArticleEdit} />
                 <Route path="/profile/:username" component={Profile} />

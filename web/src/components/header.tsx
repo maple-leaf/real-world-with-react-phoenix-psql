@@ -46,15 +46,12 @@ export class RwHeader extends React.PureComponent<HeaderProps> {
                         </li>
                         <li className="nav-item">
                             <Link className="nav-link" to="/signin">
-                                Sign up
+                                Sign in
                             </Link>
                         </li>
                     </ul>
                 </div>
             </nav>
         );
-    }
-    x() {
-        return "y";
     }
 }
