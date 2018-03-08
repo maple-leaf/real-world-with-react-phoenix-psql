@@ -38,6 +38,9 @@ defmodule AppWeb.Endpoint do
     key: "_app_key",
     signing_salt: "SnsCLDOW"
 
+  # plug to handle cors reqeust
+  plug CORSPlug
+
   plug AppWeb.Router
 
   @doc """

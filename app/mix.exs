@@ -43,7 +43,8 @@ defmodule App.Mixfile do
       {:ex_doc, "~> 0.18.3", only: :dev},
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
-      {:bcrypt_elixir, "~> 1.0"}
+      {:bcrypt_elixir, "~> 1.0"},
+      {:cors_plug, "~> 1.5"}
     ]
   end
 
