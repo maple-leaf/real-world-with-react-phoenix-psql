@@ -18,7 +18,7 @@ defmodule AppWeb.AuthControllerTest do
   end
 
   test "POST /signin with non-exist user", %{conn: conn } do
-    postBody = ["username": @username, "passwd": @passwd]
+    postBody = ["email": @email, "passwd": @passwd]
     res = post conn, "/signin", postBody
     assert json_response(res, 401) == %{"success" => false}
   end
@@ -27,7 +27,7 @@ defmodule AppWeb.AuthControllerTest do
     postBody = ["name": @username, "email": @email, "passwd": @passwd, "passwd_confirmation": @passwd]
     post conn, "/register", postBody
 
-    postBody = ["username": @username, "passwd": @passwd]
+    postBody = ["email": @email, "passwd": @passwd]
     res = post conn, "/signin", postBody
     assert json_response(res, 200) == %{"success" => true}
   end

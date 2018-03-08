@@ -2,8 +2,8 @@ defmodule AppWeb.AuthController do
   use AppWeb, :controller
   alias App.User
 
-  def signin(conn, %{"username" => username, "passwd" => passwd}) do
-    user = User.getUserByName(username)
+  def signin(conn, %{"email" => email, "passwd" => passwd}) do
+    user = User.getUserByEmail(email)
 
     if User.validate(user, passwd) do
       conn

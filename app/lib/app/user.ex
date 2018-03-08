@@ -53,6 +53,27 @@ defmodule App.User do
     |> Repo.preload(:credential)
   end
 
+  @doc """
+  get user by given user email
+
+  ## Parameters
+    - email: String
+
+  ## Examples
+  ```
+  iex> User.getUserByName("ben@test.com")
+  %{name: "Ben", email: "ben@test.com", ...}
+
+  iex> User.getUserByName("not_exist@test.com")
+  nil
+  ```
+  """
+  def getUserByEmail(email) when is_bitstring(email) do
+    User
+    |> Repo.get_by(%{"email": email})
+    |> Repo.preload(:credential)
+  end
+
   @doc"""
   create user with given attributes and insert into db
 
