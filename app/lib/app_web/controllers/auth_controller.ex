@@ -32,13 +32,14 @@ defmodule AppWeb.AuthController do
         |> json(%{"success" => true})
       {:error, errors} ->
         if is_bitstring(errors) do
-          message = errors
+          conn
+          |> put_status(:unprocessable_entity)
+          |> json(%{"success" => false, "message" => errors})
         else
-          message = process_changset_errors(errors)
+          conn
+          |> put_status(:unprocessable_entity)
+          |> json(%{"success" => false, "message" => process_changset_errors(errors)})
         end
-        conn
-        |> put_status(:unprocessable_entity)
-        |> json(%{"success" => false, "message" => message})
     end
   end
   def register(conn, _) do
