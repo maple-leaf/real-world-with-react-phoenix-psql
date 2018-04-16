@@ -1,46 +1,56 @@
+// @format
 import * as React from "react";
 
 export class Settings extends React.PureComponent {
     render() {
         return (
-            <div className="auth-page">
+            <div className="settings-page">
                 <div className="container page">
                     <div className="row">
                         <div className="col-md-6 offset-md-3 col-xs-12">
-                            <h1 className="text-xs-center">Sign up</h1>
-                            <p className="text-xs-center">
-                                <a href="">Have an account?</a>
-                            </p>
-
-                            <ul className="error-messages">
-                                <li>That email is already taken</li>
-                            </ul>
+                            <h1 className="text-xs-center">Your Settings</h1>
 
                             <form>
-                                <fieldset className="form-group">
-                                    <input
-                                        className="form-control form-control-lg"
-                                        type="text"
-                                        placeholder="Your Name"
-                                    />
+                                <fieldset>
+                                    <fieldset className="form-group">
+                                        <input
+                                            className="form-control"
+                                            type="text"
+                                            placeholder="URL of profile picture"
+                                        />
+                                    </fieldset>
+                                    <fieldset className="form-group">
+                                        <input
+                                            className="form-control form-control-lg"
+                                            type="text"
+                                            placeholder="Your Name"
+                                        />
+                                    </fieldset>
+                                    <fieldset className="form-group">
+                                        <textarea
+                                            className="form-control form-control-lg"
+                                            rows={8}
+                                            placeholder="Short bio about you"
+                                        />
+                                    </fieldset>
+                                    <fieldset className="form-group">
+                                        <input
+                                            className="form-control form-control-lg"
+                                            type="text"
+                                            placeholder="Email"
+                                        />
+                                    </fieldset>
+                                    <fieldset className="form-group">
+                                        <input
+                                            className="form-control form-control-lg"
+                                            type="password"
+                                            placeholder="Password"
+                                        />
+                                    </fieldset>
+                                    <button className="btn btn-lg btn-primary pull-xs-right">
+                                        Update Settings
+                                    </button>
                                 </fieldset>
-                                <fieldset className="form-group">
-                                    <input
-                                        className="form-control form-control-lg"
-                                        type="text"
-                                        placeholder="Email"
-                                    />
-                                </fieldset>
-                                <fieldset className="form-group">
-                                    <input
-                                        className="form-control form-control-lg"
-                                        type="password"
-                                        placeholder="Password"
-                                    />
-                                </fieldset>
-                                <button className="btn btn-lg btn-primary pull-xs-right">
-                                    Sign up
-                                </button>
                             </form>
                         </div>
                     </div>
