@@ -61,4 +61,3 @@ config :cors_plug,
   origin: ["http://localhost:9000"],
   max_age: 86400,
   methods: ["GET", "POST"]
-

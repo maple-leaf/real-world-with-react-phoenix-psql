@@ -19,6 +19,10 @@
 
   <body>
     <%= render @view_module, @view_template, assigns %>
-    <script crossorigin src="<%= static_url(@conn, "/index.js") %>"></script>
+    <%= if @isProduction do %>
+    <script crossorigin src="<%= @manifest["app.js"] %>"></script>
+    <% else %>
+    <script crossorigin src="<%= static_url(@conn, "/app.js") %>"></script>
+    <% end %>
   </body>
 </html>

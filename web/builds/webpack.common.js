@@ -8,7 +8,7 @@ module.exports = {
         app: "./src/index.tsx"
     },
     output: {
-        filename: "[name].[hash].js",
+        filename: "[name].js",
         path: distPath
     },
     plugins: [new CleanWebpackPlugin([distPath])],
